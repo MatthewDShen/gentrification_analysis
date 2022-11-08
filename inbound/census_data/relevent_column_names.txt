@@ -1,0 +1,35 @@
+Columns for Urban Data
+
+Education:
+Bachelor’s degree:
+2010 to 2018: DP02_0064E
+2019 to 2021: DP02_0065E
+Graduate degree:
+2010 to 2018: DP02_0065E
+2019 to 2021: DP02_0066E
+ 
+Immigration:
+Foreign born, not a US Citizen:
+2010 to 2018: DP02_0095E
+2019: DP02_0096E
+2020: ???
+2021: DP02_0097E
+ 
+Median Income:
+Household: S1901_C01_012E
+Family: S1901_C02_012E
+Nonfamily households: S1901_C04_012E
+Married-couple families: S1901_C03_012E
+
+
+DP05 - White non-hispanic
+2010-2016 it is DP05_0072E
+2017-2021 it is DP05_0077E
+
+DP05 - Median Age
+2010-2016  it is DP05_0017E
+2017-2021 it is DP05_0018E
+
+DP04 - Rent - Gross rent median price
+2011-2014 it is DP04_0132E 
+2015-2021 it is DP04_0134E
