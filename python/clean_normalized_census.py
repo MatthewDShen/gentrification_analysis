@@ -1,18 +1,18 @@
 import pandas as pd
 
 # Read in CSVs
-census_2011 = pd.read_csv("inbound/census_data/by_year/censuse_data_2011.csv", low_memory=False)
-census_2012 = pd.read_csv("inbound/census_data/by_year/censuse_data_2012.csv", low_memory=False)
-census_2013 = pd.read_csv("inbound/census_data/by_year/censuse_data_2013.csv", low_memory=False)
-census_2014 = pd.read_csv("inbound/census_data/by_year/censuse_data_2014.csv", low_memory=False)
-census_2015 = pd.read_csv("inbound/census_data/by_year/censuse_data_2015.csv", low_memory=False)
-census_2016 = pd.read_csv("inbound/census_data/by_year/censuse_data_2016.csv", low_memory=False)
-census_2017 = pd.read_csv("inbound/census_data/by_year/censuse_data_2017.csv", low_memory=False)
-census_2018 = pd.read_csv("inbound/census_data/by_year/censuse_data_2018.csv", low_memory=False)
-census_2019 = pd.read_csv("inbound/census_data/by_year/censuse_data_2019.csv", low_memory=False)
+census_2011 = pd.read_csv("/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/censuse_data_2011.csv", low_memory=False)
+census_2012 = pd.read_csv("/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/censuse_data_2012.csv", low_memory=False)
+census_2013 = pd.read_csv("/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/censuse_data_2013.csv", low_memory=False)
+census_2014 = pd.read_csv("/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/censuse_data_2014.csv", low_memory=False)
+census_2015 = pd.read_csv("/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/censuse_data_2015.csv", low_memory=False)
+census_2016 = pd.read_csv("/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/censuse_data_2016.csv", low_memory=False)
+census_2017 = pd.read_csv("/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/censuse_data_2017.csv", low_memory=False)
+census_2018 = pd.read_csv("/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/censuse_data_2018.csv", low_memory=False)
+census_2019 = pd.read_csv("/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/censuse_data_2019.csv", low_memory=False)
 
 # Change variable names to be more descriptive
-for i in [census_2011, census_2012, census_2013, census_2014, census_2015, census_2016, census_2017, census_2018]:
+for i in [census_2011, census_2012, census_2013, census_2014, census_2015, census_2016, census_2017, census_2018, census_2019]:
     i['bachelors'] = i['DP02_0064E']
     i['graduate'] = i['DP02_0065E']
     i['household'] = i['S1901_C01_012E']
@@ -20,7 +20,7 @@ for i in [census_2011, census_2012, census_2013, census_2014, census_2015, censu
     i['family'] = i['S1901_C02_012E']
     i['nonfamily-households'] = i['S1901_C04_012E']
     i['married-couple-families'] = i['S1901_C03_012E']
-    i['zip'] = i['NAME'].apply(lambda x: x.strip('ZCTA5'))
+    i['ZCTA5'] = i['NAME'][-5:]
 
 for i in [census_2011, census_2012, census_2013, census_2014, census_2015, census_2016]:
     i['white_non_hispanic'] = i['DP05_0072E']
@@ -39,27 +39,16 @@ for i in [census_2017, census_2018, census_2019]:
 
 
 
-census_2019['bachelors'] = census_2019['DP02_0065E']
-census_2019['graduate'] = census_2019['DP02_0066E']
-census_2019['household'] = census_2019['S1901_C01_012E']
-census_2019['foreign-born-non-us'] = census_2019['DP02_0096E']
-census_2019['family'] = census_2019['S1901_C02_012E']
-census_2019['nonfamily-households'] = census_2019['S1901_C04_012E']
-census_2019['married-couple-families'] = census_2019['S1901_C03_012E']
-census_2019['zip'] = census_2019['NAME'].apply(lambda x: x.strip('ZCTA5'))
-
-
-
 # Subset data to only include information we need
-census_2011 = census_2011[['zip', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
-census_2012 = census_2012[['zip', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
-census_2013 = census_2013[['zip', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
-census_2014 = census_2014[['zip', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
-census_2015 = census_2015[['zip', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
-census_2016 = census_2016[['zip', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
-census_2017 = census_2017[['zip', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
-census_2018 = census_2018[['zip', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
-census_2019 = census_2019[['zip', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
+census_2011 = census_2011[['ZCTA5', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
+census_2012 = census_2012[['ZCTA5', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
+census_2013 = census_2013[['ZCTA5', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
+census_2014 = census_2014[['ZCTA5', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
+census_2015 = census_2015[['ZCTA5', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
+census_2016 = census_2016[['ZCTA5', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
+census_2017 = census_2017[['ZCTA5', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
+census_2018 = census_2018[['ZCTA5', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
+census_2019 = census_2019[['ZCTA5', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
 
 
 
@@ -85,12 +74,16 @@ census_2018 = normalize(census_2018)
 census_2019 = normalize(census_2019)
 
 # Write census data to csv
-census_2011 = census_2011.to_csv('inbound/census_data/normalized/census_2011.csv')
-census_2012 = census_2012.to_csv('inbound/census_data/normalized/census_2012.csv')
-census_2013 = census_2013.to_csv('inbound/census_data/normalized/census_2013.csv')
-census_2014 = census_2014.to_csv('inbound/census_data/normalized/census_2014.csv')
-census_2015 = census_2015.to_csv('inbound/census_data/normalized/census_2015.csv')
-census_2016 = census_2016.to_csv('inbound/census_data/normalized/census_2016.csv')
-census_2017 = census_2017.to_csv('inbound/census_data/normalized/census_2017.csv')
-census_2018 = census_2018.to_csv('inbound/census_data/normalized/census_2018.csv')
-census_2019 = census_2019.to_csv('inbound/census_data/normalized/census_2019.csv')
+census_2011 = census_2011.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/normalized/census_2011.csv')
+census_2012 = census_2012.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/normalized/census_2012.csv')
+census_2013 = census_2013.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/normalized/census_2013.csv')
+census_2014 = census_2014.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/normalized/census_2014.csv')
+census_2015 = census_2015.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/normalized/census_2015.csv')
+census_2016 = census_2016.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/normalized/census_2016.csv')
+census_2017 = census_2017.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/normalized/census_2017.csv')
+census_2018 = census_2018.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/normalized/census_2018.csv')
+census_2019 = census_2019.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/normalized/census_2019.csv')
+
+
+
+
