@@ -65,10 +65,8 @@ def func_write_csv_single_year(lst_years,lst_census_types,path):
         # Write a csv of all dataframe for a single year
         df_single_year.to_csv('/home/matthewdshen/GitHub/urban_data_project/inbound/census_data/by_year/censuse_data_' + i + '.csv')
 
-
-
 lst_years = ['2011','2012','2013','2014','2015','2016','2017','2018','2019']
 lst_census_types = ['DP02','DP04','DP05','S1901']
-path = '/home/matthewdshen/GitHub/urban_data_project/inbound/census_data/'
+path = 'inbound/census_data/'
 
 func_write_csv_single_year(lst_years,lst_census_types,path)

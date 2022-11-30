@@ -1,5 +1,6 @@
 import pandas as pd
 
+# Read in CSVs
 census_2011 = pd.read_csv("inbound/census_data/by_year/censuse_data_2011.csv", low_memory=False)
 census_2012 = pd.read_csv("inbound/census_data/by_year/censuse_data_2012.csv", low_memory=False)
 census_2013 = pd.read_csv("inbound/census_data/by_year/censuse_data_2013.csv", low_memory=False)
@@ -10,6 +11,7 @@ census_2017 = pd.read_csv("inbound/census_data/by_year/censuse_data_2017.csv", l
 census_2018 = pd.read_csv("inbound/census_data/by_year/censuse_data_2018.csv", low_memory=False)
 census_2019 = pd.read_csv("inbound/census_data/by_year/censuse_data_2019.csv", low_memory=False)
 
+# Change variable names to be more descriptive
 for i in [census_2011, census_2012, census_2013, census_2014, census_2015, census_2016, census_2017, census_2018]:
     i['bachelors'] = i['DP02_0064E']
     i['graduate'] = i['DP02_0065E']
@@ -48,7 +50,7 @@ census_2019['zip'] = census_2019['NAME'].apply(lambda x: x.strip('ZCTA5'))
 
 
 
-
+# Subset data to only include information we need
 census_2011 = census_2011[['zip', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
 census_2012 = census_2012[['zip', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
 census_2013 = census_2013[['zip', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
@@ -60,7 +62,9 @@ census_2018 = census_2018[['zip', 'bachelors', 'graduate', 'household', 'foreign
 census_2019 = census_2019[['zip', 'bachelors', 'graduate', 'household', 'foreign-born-non-us', 'family', 'nonfamily-households', 'nonfamily-households', 'married-couple-families', 'gross_rent', 'median_age', 'white_non_hispanic']]
 
 
+
 def normalize(df):
+    '''The following function makes all the data into floats or deletes it and then normalizes the data'''
     result = df.copy()
     for feature_name in df.columns:
         df[feature_name] = df[feature_name].apply(pd.to_numeric, errors='coerce')
@@ -69,6 +73,7 @@ def normalize(df):
         result[feature_name] = (df[feature_name] - min_value) / (max_value - min_value)
     return result
 
+# Run normalization function
 census_2011 = normalize(census_2011)
 census_2012 = normalize(census_2012)
 census_2013 = normalize(census_2013)
@@ -78,3 +83,14 @@ census_2016 = normalize(census_2016)
 census_2017 = normalize(census_2017)
 census_2018 = normalize(census_2018)
 census_2019 = normalize(census_2019)
+
+# Write census data to csv
+census_2011 = census_2011.to_csv('inbound/census_data/normalized/census_2011.csv')
+census_2012 = census_2012.to_csv('inbound/census_data/normalized/census_2012.csv')
+census_2013 = census_2013.to_csv('inbound/census_data/normalized/census_2013.csv')
+census_2014 = census_2014.to_csv('inbound/census_data/normalized/census_2014.csv')
+census_2015 = census_2015.to_csv('inbound/census_data/normalized/census_2015.csv')
+census_2016 = census_2016.to_csv('inbound/census_data/normalized/census_2016.csv')
+census_2017 = census_2017.to_csv('inbound/census_data/normalized/census_2017.csv')
+census_2018 = census_2018.to_csv('inbound/census_data/normalized/census_2018.csv')
+census_2019 = census_2019.to_csv('inbound/census_data/normalized/census_2019.csv')
