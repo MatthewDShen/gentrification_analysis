@@ -37,9 +37,6 @@ for df in [census_2017, census_2018, census_2019]:
 for df in [census_2011, census_2012, census_2013, census_2014, census_2015, census_2016, census_2017, census_2018, census_2019]:
     df.rename(columns = {
         'S1901_C01_012E': 'household_income',
-        'S1901_C02_012E': 'family_income',
-        'S1901_C04_012E': 'nonfamily_households_income',
-        'S1901_C03_012E': 'married-couple_families_income'
     }, inplace = True)
 
 # Find and rename number of immigrints
@@ -57,7 +54,6 @@ for df in [census_2019]:
 for df in [census_2011, census_2012, census_2013, census_2014, census_2015, census_2016, census_2017, census_2018, census_2019]:
     df.rename(columns = {
         'DP02_0064E': 'bachelors',
-        'DP02_0065E': 'graduate',
     }, inplace = True)
 
 # Find and rename rental cost
@@ -72,20 +68,20 @@ for df in [census_2015, census_2016, census_2017, census_2018, census_2019]:
     }, inplace = True)
 
 # Remove columns not needed
-census_2011 = census_2011[['NAME','median_age','white_non-hispanic','household_income','family_income','nonfamily_households_income','married-couple_families_income','foreign_born_not_a_us_citizen','bachelors','graduate','gross_rent_media_price']]
-census_2012 = census_2012[['NAME','median_age','white_non-hispanic','household_income','family_income','nonfamily_households_income','married-couple_families_income','foreign_born_not_a_us_citizen','bachelors','graduate','gross_rent_media_price']]
-census_2013 = census_2013[['NAME','median_age','white_non-hispanic','household_income','family_income','nonfamily_households_income','married-couple_families_income','foreign_born_not_a_us_citizen','bachelors','graduate','gross_rent_media_price']]
-census_2014 = census_2014[['NAME','median_age','white_non-hispanic','household_income','family_income','nonfamily_households_income','married-couple_families_income','foreign_born_not_a_us_citizen','bachelors','graduate','gross_rent_media_price']]
-census_2015 = census_2015[['NAME','median_age','white_non-hispanic','household_income','family_income','nonfamily_households_income','married-couple_families_income','foreign_born_not_a_us_citizen','bachelors','graduate','gross_rent_media_price']]
-census_2016 = census_2016[['NAME','median_age','white_non-hispanic','household_income','family_income','nonfamily_households_income','married-couple_families_income','foreign_born_not_a_us_citizen','bachelors','graduate','gross_rent_media_price']]
-census_2017 = census_2017[['NAME','median_age','white_non-hispanic','household_income','family_income','nonfamily_households_income','married-couple_families_income','foreign_born_not_a_us_citizen','bachelors','graduate','gross_rent_media_price']]
-census_2018 = census_2018[['NAME','median_age','white_non-hispanic','household_income','family_income','nonfamily_households_income','married-couple_families_income','foreign_born_not_a_us_citizen','bachelors','graduate','gross_rent_media_price']]
-census_2019 = census_2019[['NAME','median_age','white_non-hispanic','household_income','family_income','nonfamily_households_income','married-couple_families_income','foreign_born_not_a_us_citizen','bachelors','graduate','gross_rent_media_price']]
+census_2011 = census_2011[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
+census_2012 = census_2012[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
+census_2013 = census_2013[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
+census_2014 = census_2014[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
+census_2015 = census_2015[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
+census_2016 = census_2016[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
+census_2017 = census_2017[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
+census_2018 = census_2018[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
+census_2019 = census_2019[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
 
 # Function to make all string into floats or remove the value
 def func_make_float(df):
     result = df.copy()
-    for feature_name in ['median_age','white_non-hispanic','household_income','family_income','nonfamily_households_income','married-couple_families_income','foreign_born_not_a_us_citizen','bachelors','graduate','gross_rent_media_price']:
+    for feature_name in ['median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']:
         result[feature_name] = df[feature_name].apply(pd.to_numeric, errors='coerce')
     return result
 
