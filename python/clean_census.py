@@ -1,15 +1,15 @@
 import pandas as pd
 
 # Read in CSVs
-census_2011 = pd.read_csv("/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/census_data_2011.csv", low_memory=False)
-census_2012 = pd.read_csv("/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/census_data_2012.csv", low_memory=False)
-census_2013 = pd.read_csv("/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/census_data_2013.csv", low_memory=False)
-census_2014 = pd.read_csv("/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/census_data_2014.csv", low_memory=False)
-census_2015 = pd.read_csv("/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/census_data_2015.csv", low_memory=False)
-census_2016 = pd.read_csv("/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/census_data_2016.csv", low_memory=False)
-census_2017 = pd.read_csv("/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/census_data_2017.csv", low_memory=False)
-census_2018 = pd.read_csv("/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/census_data_2018.csv", low_memory=False)
-census_2019 = pd.read_csv("/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/census_data_2019.csv", low_memory=False)
+census_2011 = pd.read_csv('analysis/by_year/census_data_2011.csv', low_memory=False)
+census_2012 = pd.read_csv('analysis/by_year/census_data_2011.csv', low_memory=False)
+census_2013 = pd.read_csv('analysis/by_year/census_data_2011.csv', low_memory=False)
+census_2014 = pd.read_csv('analysis/by_year/census_data_2011.csv', low_memory=False)
+census_2015 = pd.read_csv('analysis/by_year/census_data_2011.csv', low_memory=False)
+census_2016 = pd.read_csv('analysis/by_year/census_data_2011.csv', low_memory=False)
+census_2017 = pd.read_csv('analysis/by_year/census_data_2011.csv', low_memory=False)
+census_2018 = pd.read_csv('analysis/by_year/census_data_2011.csv', low_memory=False)
+census_2019 = pd.read_csv('analysis/by_year/census_data_2011.csv', low_memory=False)
 
 # Find and rename median age columns
 for df in [census_2011, census_2012, census_2013, census_2014, census_2015, census_2016]:
@@ -97,13 +97,13 @@ census_2019 = func_make_float(census_2019)
 
 
 # Write census data to csv
-census_2011 = census_2011.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/cleaned_features/census_2011.csv', index = False)
-census_2012 = census_2012.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/cleaned_features/census_2012.csv', index = False)
-census_2013 = census_2013.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/cleaned_features/census_2013.csv', index = False)
-census_2014 = census_2014.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/cleaned_features/census_2014.csv', index = False)
-census_2015 = census_2015.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/cleaned_features/census_2015.csv', index = False)
-census_2016 = census_2016.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/cleaned_features/census_2016.csv', index = False)
-census_2017 = census_2017.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/cleaned_features/census_2017.csv', index = False)
-census_2018 = census_2018.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/cleaned_features/census_2018.csv', index = False)
-census_2019 = census_2019.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/cleaned_features/census_2019.csv', index = False)
+census_2011 = census_2011.to_csv('analysis/cleaned_features/census_2011.csv', index = False)
+census_2012 = census_2012.to_csv('analysis/cleaned_features/census_2012.csv', index = False)
+census_2013 = census_2013.to_csv('analysis/cleaned_features/census_2013.csv', index = False)
+census_2014 = census_2014.to_csv('analysis/cleaned_features/census_2014.csv', index = False)
+census_2015 = census_2015.to_csv('analysis/cleaned_features/census_2015.csv', index = False)
+census_2016 = census_2016.to_csv('analysis/cleaned_features/census_2016.csv', index = False)
+census_2017 = census_2017.to_csv('analysis/cleaned_features/census_2017.csv', index = False)
+census_2018 = census_2018.to_csv('analysis/cleaned_features/census_2018.csv', index = False)
+census_2019 = census_2019.to_csv('analysis/cleaned_features/census_2019.csv', index = False)
 
