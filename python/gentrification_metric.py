@@ -15,36 +15,17 @@ census_2018 = pd.read_csv(os.getcwd() + '/analysis/cleaned_features/census_2018.
 census_2019 = pd.read_csv(os.getcwd() + '/analysis/cleaned_features/census_2019.csv', encoding='utf-8')
 
 
+
 # Group data based on zipcode
-census_2011 = census_2011.groupby(['NAME'], as_index=False).mean()
-census_2012 = census_2012.groupby(['NAME'], as_index=False).mean()
-census_2013 = census_2013.groupby(['NAME'], as_index=False).mean()
-census_2014 = census_2014.groupby(['NAME'], as_index=False).mean()
-census_2015 = census_2015.groupby(['NAME'], as_index=False).mean()
-census_2016 = census_2016.groupby(['NAME'], as_index=False).mean()
-census_2017 = census_2017.groupby(['NAME'], as_index=False).mean()
-census_2018 = census_2018.groupby(['NAME'], as_index=False).mean()
-census_2019 = census_2019.groupby(['NAME'], as_index=False).mean()
-
-
-# make certain features per capita
-def func_to_make_per_capita(df):
-    result = df.copy()
-    for feature_name in ['white_non-hispanic','foreign_born_not_a_us_citizen','bachelors']:
-        result[feature_name] = df[feature_name].apply(df[feature_name]/df['total_population'])
-    return result
-
-
-# apply the func to make per capita to some columns in the dataframes
-census_2011 = func_to_make_per_capita(census_2011)
-census_2012 = func_to_make_per_capita(census_2012)
-census_2013 = func_to_make_per_capita(census_2013)
-census_2014 = func_to_make_per_capita(census_2014)
-census_2015 = func_to_make_per_capita(census_2015)
-census_2016 = func_to_make_per_capita(census_2016)
-census_2017 = func_to_make_per_capita(census_2017)
-census_2018 = func_to_make_per_capita(census_2018)
-census_2019 = func_to_make_per_capita(census_2019)
+# census_2011 = census_2011.groupby(['NAME'], as_index=False).mean()
+# census_2012 = census_2012.groupby(['NAME'], as_index=False).mean()
+# census_2013 = census_2013.groupby(['NAME'], as_index=False).mean()
+# census_2014 = census_2014.groupby(['NAME'], as_index=False).mean()
+# census_2015 = census_2015.groupby(['NAME'], as_index=False).mean()
+# census_2016 = census_2016.groupby(['NAME'], as_index=False).mean()
+# census_2017 = census_2017.groupby(['NAME'], as_index=False).mean()
+# census_2018 = census_2018.groupby(['NAME'], as_index=False).mean()
+# census_2019 = census_2019.groupby(['NAME'], as_index=False).mean()
 
 
 # Interpolate data to fill in missing values
@@ -70,12 +51,45 @@ census_2018.fillna(method = 'bfill', inplace = True)
 census_2019.fillna(method = 'bfill', inplace = True)
 
 
+# Make certain features per capita
+def func_to_make_per_capita(df):
+    result = df.copy()
+    for feature_name in ['white_non-hispanic','foreign_born_not_a_us_citizen','bachelors']:
+        result[feature_name + '_percent'] = df[feature_name]/df['total_population']
+    return result
+
+# Apply the func to make per capita to some columns in the dataframes
+census_2011 = func_to_make_per_capita(census_2011)
+census_2012 = func_to_make_per_capita(census_2012)
+census_2013 = func_to_make_per_capita(census_2013)
+census_2014 = func_to_make_per_capita(census_2014)
+census_2015 = func_to_make_per_capita(census_2015)
+census_2016 = func_to_make_per_capita(census_2016)
+census_2017 = func_to_make_per_capita(census_2017)
+census_2018 = func_to_make_per_capita(census_2018)
+census_2019 = func_to_make_per_capita(census_2019)
+
+
+
+# print(census_2011.isna().sum())
+# print(census_2012.isna().sum())
+# print(census_2013.isna().sum())
+# print(census_2014.isna().sum())
+# print(census_2015.isna().sum())
+# print(census_2016.isna().sum())
+# print(census_2017.isna().sum())
+# print(census_2018.isna().sum())
+# print(census_2019.isna().sum())
+
+
 
 # Get difference in values from 2011 and 2019
 df_2011_2019 = pd.merge(census_2011,census_2019,how = 'inner', on = 'NAME', suffixes=['_2011','_2019'])
 
+
+
 # Get list of values
-lst_values = ['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']
+lst_values = ['NAME','median_age','white_non-hispanic_percent','household_income','foreign_born_not_a_us_citizen_percent','bachelors_percent','gross_rent_media_price']
 
 # Intialize dataframe
 df_delta = pd.DataFrame(df_2011_2019['NAME'])
@@ -84,9 +98,12 @@ df_delta = pd.DataFrame(df_2011_2019['NAME'])
 for feature in lst_values[1:]:
     df_delta[feature + '_delta'] = df_2011_2019[feature + '_2019'] - df_2011_2019[feature + '_2011'] # get the change in census tracts
 
+
 # Switch signs so that gentrification can be seen as positive
 df_delta['median_age_delta'] = df_delta['median_age_delta'] * -1
-df_delta['foreign_born_not_a_us_citizen_delta'] = df_delta['foreign_born_not_a_us_citizen_delta'] * -1
+df_delta['foreign_born_not_a_us_citizen_percent_delta'] = df_delta['foreign_born_not_a_us_citizen_percent_delta'] * -1
+
+
 
 # Normalize the data
 def normalize(df):
@@ -99,22 +116,28 @@ def normalize(df):
     return result
 df_delta_norm = normalize(df_delta)
 
+# Write csv of delta values
+df_delta_norm.to_csv(os.getcwd() + '/analysis/normalized/clean_normalized.csv')
+
+
 # Get the mean of the normalized data
-df_mean = df_delta_norm.mean()
+# df_mean = df_delta_norm.mean()
 
-# Get sum of mean values
-int_gentrification_metric_mean = sum(df_mean)
+# print(df_mean)
 
-# Get getrification metric for each ZCTA5
-df_delta_norm['gentrification_metric'] = df_delta_norm.sum(axis = 'columns')
+# # Get sum of mean values
+# int_gentrification_metric_mean = sum(df_mean)
 
-# Get difference between city wide gentrification metric and individual zipcode
-df_delta_norm['gentrification_metric_delta'] = df_delta_norm['gentrification_metric'] - int_gentrification_metric_mean
+# # Get getrification metric for each ZCTA5
+# df_delta_norm['gentrification_metric'] = df_delta_norm.sum(axis = 'columns')
 
-df_delta_norm[df_delta_norm['NAME'] == 'ZCTA5 11249']
+# # Get difference between city wide gentrification metric and individual zipcode
+# df_delta_norm['gentrification_metric_delta'] = df_delta_norm['gentrification_metric'] - int_gentrification_metric_mean
 
-print('unique values',len(df_delta_norm['NAME'].unique()))
+# df_delta_norm[df_delta_norm['NAME'] == 'ZCTA5 11249']
 
-print('total values', len(df_delta_norm['NAME']))
+# print('unique values',len(df_delta_norm['NAME'].unique()))
 
-print(tabulate(df_delta_norm.head(), headers='keys', tablefmt='psql'))
+# print('total values', len(df_delta_norm['NAME']))
+
+# print(tabulate(df_delta_norm.head(), headers='keys', tablefmt='psql'))
