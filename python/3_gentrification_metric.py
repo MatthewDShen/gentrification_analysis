@@ -89,7 +89,7 @@ df_2011_2019 = pd.merge(census_2011,census_2019,how = 'inner', on = 'NAME', suff
 
 
 # Get list of values
-lst_values = ['NAME','median_age','white_non-hispanic_percent','household_income','foreign_born_not_a_us_citizen_percent','bachelors_percent','gross_rent_media_price']
+lst_values = ['NAME','median_age','white_non-hispanic_percent','household_income','foreign_born_not_a_us_citizen_percent','bachelors_percent','gross_rent_median_price']
 
 # Intialize dataframe
 df_delta = pd.DataFrame(df_2011_2019['NAME'])
@@ -106,18 +106,18 @@ df_delta['foreign_born_not_a_us_citizen_percent_delta'] = df_delta['foreign_born
 
 
 # Normalize the data
-def normalize(df):
-    '''The following normalizes the data'''
-    result = df.copy()
-    for feature_name in df.columns[1:]:
-        max_value = df[feature_name].max()
-        min_value = df[feature_name].min()
-        result[feature_name] = (df[feature_name] - min_value) / (max_value - min_value)
-    return result
-df_delta_norm = normalize(df_delta)
+# def normalize(df):
+#     '''The following normalizes the data'''
+#     result = df.copy()
+#     for feature_name in df.columns[1:]:
+#         max_value = df[feature_name].max()
+#         min_value = df[feature_name].min()
+#         result[feature_name] = (df[feature_name] - min_value) / (max_value - min_value)
+#     return result
+# df_delta_norm = normalize(df_delta)
 
 # Write csv of delta values
-df_delta_norm.to_csv(os.getcwd() + '/analysis/normalized/clean_normalized.csv')
+df_delta.to_csv(os.getcwd() + '/analysis/normalized/clean_normalized.csv', index = False)
 
 
 # Get the mean of the normalized data

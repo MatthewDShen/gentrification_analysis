@@ -1,4 +1,4 @@
-NAME,total_population,median_age,white_non-hispanic,household_income,foreign_born_not_a_us_citizen,bachelors,gross_rent_media_price
+NAME,total_population,median_age,white_non-hispanic,household_income,foreign_born_not_a_us_citizen,bachelors,gross_rent_median_price
 06390,183,58.9,175,,4,36,
 10001,22924,36.7,12182,88526.0,3527,6810,2065.0
 10002,74993,43.6,16472,35859.0,12407,12928,963.0

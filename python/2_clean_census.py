@@ -71,29 +71,29 @@ for df in [census_2019]:
 # Find and rename rental cost
 for df in [census_2011, census_2012, census_2013, census_2014]:
     df.rename(columns = {
-        'DP04_0132E': 'gross_rent_media_price'
+        'DP04_0132E': 'gross_rent_median_price'
     }, inplace = True)
 
 for df in [census_2015, census_2016, census_2017, census_2018, census_2019]:
     df.rename(columns = {
-        'DP04_0134E': 'gross_rent_media_price'
+        'DP04_0134E': 'gross_rent_median_price'
     }, inplace = True)
 
 # Remove columns not needed
-census_2011 = census_2011[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
-census_2012 = census_2012[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
-census_2013 = census_2013[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
-census_2014 = census_2014[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
-census_2015 = census_2015[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
-census_2016 = census_2016[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
-census_2017 = census_2017[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
-census_2018 = census_2018[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
-census_2019 = census_2019[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
+census_2011 = census_2011[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_median_price']]
+census_2012 = census_2012[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_median_price']]
+census_2013 = census_2013[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_median_price']]
+census_2014 = census_2014[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_median_price']]
+census_2015 = census_2015[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_median_price']]
+census_2016 = census_2016[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_median_price']]
+census_2017 = census_2017[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_median_price']]
+census_2018 = census_2018[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_median_price']]
+census_2019 = census_2019[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_median_price']]
 
 # Function to make all string into floats or remove the value
 def func_make_float(df):
     result = df.copy()
-    for feature_name in ['median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']:
+    for feature_name in ['median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_median_price']:
         result[feature_name] = df[feature_name].apply(pd.to_numeric, errors='coerce')
     return result
 
