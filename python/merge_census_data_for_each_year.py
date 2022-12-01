@@ -20,7 +20,8 @@ def func_csv_file_names(path):
     return lst_data_files
 
 def func_all_data_in_folder(lst_census_types,path):
-    '''Given a list of the types of censuse data titles and the path of a folder. Create a list of all csv files with the term data in them'''
+    '''Given a list of the types of census data titles and the path of a folder. 
+    Create a list of all csv files with the term data in them'''
 
     # Loop through each census type and store list of paths for each csv
     lst_all_data_paths = []
@@ -31,7 +32,8 @@ def func_all_data_in_folder(lst_census_types,path):
     return lst_all_data_paths
 
 def func_single_year_paths(year,lst_census_types,path):
-    '''Given a the year, a list of census types, and the path of a folder. Create a list of paths for a single year'''
+    '''Given a the year, a list of census types, and the path of a folder. 
+    Create a list of paths for a single year'''
     
     # Get list of all data paths for all types
     lst_all_data_paths = func_all_data_in_folder(lst_census_types,path)
@@ -63,10 +65,10 @@ def func_write_csv_single_year(lst_years,lst_census_types,path):
             df_single_year = pd.concat([df_single_year, df_single_dataset])
 
         # Write a csv of all dataframe for a single year
-        df_single_year.to_csv('/home/matthewdshen/GitHub/urban_data_project/analysis/by_year/census_data_' + i + '.csv')
+        df_single_year.to_csv('C:\\Users\\abonc\\OneDrive\\GitHub\\urban_data_project\\analysis\\cleaned_features_test' + i + '.csv')
 
 lst_years = ['2011','2012','2013','2014','2015','2016','2017','2018','2019']
 lst_census_types = ['DP02','DP04','DP05','S1901']
-path = '/home/matthewdshen/GitHub/urban_data_project/inbound/census_data/'
+path = 'C:\\Users\\abonc\\OneDrive\\Documents\\GitHub\\urban_data_project\\inbound\\census_data'
 
 func_write_csv_single_year(lst_years,lst_census_types,path)
