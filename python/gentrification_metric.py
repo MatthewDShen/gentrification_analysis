@@ -2,15 +2,26 @@ import pandas as pd
 from tabulate import tabulate
 
 # Read cleaned dataframes
-census_2011 = pd.read_csv('analysis/cleaned_features/census_2011.csv')
-census_2012 = pd.read_csv('analysis/cleaned_features/census_2012.csv')
-census_2013 = pd.read_csv('analysis/cleaned_features/census_2013.csv')
-census_2014 = pd.read_csv('analysis/cleaned_features/census_2014.csv')
-census_2015 = pd.read_csv('analysis/cleaned_features/census_2015.csv')
-census_2016 = pd.read_csv('analysis/cleaned_features/census_2016.csv')
-census_2017 = pd.read_csv('analysis/cleaned_features/census_2017.csv')
-census_2018 = pd.read_csv('analysis/cleaned_features/census_2018.csv')
-census_2019 = pd.read_csv('analysis/cleaned_features/census_2019.csv')
+#census_2011 = pd.read_csv('analysis/cleaned_features/census_2011.csv')
+#census_2012 = pd.read_csv('analysis/cleaned_features/census_2012.csv')
+#census_2013 = pd.read_csv('analysis/cleaned_features/census_2013.csv')
+#census_2014 = pd.read_csv('analysis/cleaned_features/census_2014.csv')
+#census_2015 = pd.read_csv('analysis/cleaned_features/census_2015.csv')
+#census_2016 = pd.read_csv('analysis/cleaned_features/census_2016.csv')
+#census_2017 = pd.read_csv('analysis/cleaned_features/census_2017.csv')
+#census_2018 = pd.read_csv('analysis/cleaned_features/census_2018.csv')
+#census_2019 = pd.read_csv('analysis/cleaned_features/census_2019.csv')
+
+#read cleaned dataframes_thomas
+census_2011 = pd.read_csv('/Users/twallacech/Cornell Tech/Urban Data/Semester_Project/urban_data_project/analysis/cleaned_features/census_2011.csv')
+census_2012 = pd.read_csv('/Users/twallacech/Cornell Tech/Urban Data/Semester_Project/urban_data_project/analysis/cleaned_features/census_2012.csv')
+census_2013 = pd.read_csv('/Users/twallacech/Cornell Tech/Urban Data/Semester_Project/urban_data_project/analysis/cleaned_features/census_2013.csv')
+census_2014 = pd.read_csv('/Users/twallacech/Cornell Tech/Urban Data/Semester_Project/urban_data_project/analysis/cleaned_features/census_2014.csv')
+census_2015 = pd.read_csv('/Users/twallacech/Cornell Tech/Urban Data/Semester_Project/urban_data_project/analysis/cleaned_features/census_2015.csv')
+census_2016 = pd.read_csv('/Users/twallacech/Cornell Tech/Urban Data/Semester_Project/urban_data_project/analysis/cleaned_features/census_2016.csv')
+census_2017 = pd.read_csv('/Users/twallacech/Cornell Tech/Urban Data/Semester_Project/urban_data_project/analysis/cleaned_features/census_2017.csv')
+census_2018 = pd.read_csv('/Users/twallacech/Cornell Tech/Urban Data/Semester_Project/urban_data_project/analysis/cleaned_features/census_2018.csv')
+census_2019 = pd.read_csv('/Users/twallacech/Cornell Tech/Urban Data/Semester_Project/urban_data_project/analysis/cleaned_features/census_2019.csv')
 
 
 # Group data based on zipcode
@@ -47,6 +58,8 @@ census_2017.fillna(method = 'bfill', inplace = True)
 census_2018.fillna(method = 'bfill', inplace = True)
 census_2019.fillna(method = 'bfill', inplace = True)
 
+
+
 # Get difference in values from 2011 and 2019
 df_2011_2019 = pd.merge(census_2011,census_2019,how = 'inner', on = 'NAME', suffixes=['_2011','_2019'])
 
@@ -82,15 +95,15 @@ df_mean = df_delta_norm.mean()
 int_gentrification_metric_mean = sum(df_mean)
 
 # Get getrification metric for each ZCTA5
-df_delta_norm['gentrification_metric'] = df_delta_norm.sum( axis = 'columns')
+df_delta_norm['gentrification_metric'] = df_delta_norm.sum(axis = 'columns')
 
 # Get difference between city wide gentrification metric and individual zipcode
 df_delta_norm['gentrification_metric_delta'] = df_delta_norm['gentrification_metric'] - int_gentrification_metric_mean
 
 df_delta_norm[df_delta_norm['NAME'] == 'ZCTA5 11249']
 
-# print('unique values',len(df_delta_norm['NAME'].unique()))
+print('unique values',len(df_delta_norm['NAME'].unique()))
 
-# print('total values', len(df_delta_norm['NAME']))
+print('total values', len(df_delta_norm['NAME']))
 
-print(df_delta_norm[df_delta_norm['NAME'] == 'ZCTA5 11249'])
+#print(df_delta_norm[df_delta_norm['NAME'] == 'ZCTA5 11249'])
