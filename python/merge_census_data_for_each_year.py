@@ -62,13 +62,16 @@ def func_write_csv_single_year(lst_years,lst_census_types,path):
         df_single_year = pd.DataFrame()
         for j in lst_single_year_paths:
             df_single_dataset = pd.read_csv(j, skiprows = [1], low_memory = False) # skip second row of data b/c contains description of column type. This messes up the dtype of the column.
-            df_single_year = pd.concat([df_single_year, df_single_dataset])
+            df_single_year = pd.concat([df_single_year, df_single_dataset], axis = 1)
 
         # Write a csv of all dataframe for a single year
-        df_single_year.to_csv('C:\\Users\\abonc\\OneDrive\\GitHub\\urban_data_project\\analysis\\cleaned_features_test' + i + '.csv')
+        df_single_year.to_csv(os.getcwd() + '/analysis/by_year/census_' + i + '.csv')
 
 lst_years = ['2011','2012','2013','2014','2015','2016','2017','2018','2019']
 lst_census_types = ['DP02','DP04','DP05','S1901']
-path = os.getcwd()[:-6] + 'inbound/census_data/'
+path = os.getcwd() + '/inbound/census_data/'
+
+
+
 
 func_write_csv_single_year(lst_years,lst_census_types,path)

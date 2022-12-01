@@ -2,15 +2,15 @@ import pandas as pd
 import os
 
 # Read in CSVs
-census_2011 = pd.read_csv(os.getcwd()[:-6] +'analysis/by_year/census_data_2011.csv', low_memory=False, encoding='utf-8')
-census_2012 = pd.read_csv(os.getcwd()[:-6] +'analysis/by_year/census_data_2011.csv', low_memory=False, encoding='utf-8')
-census_2013 = pd.read_csv(os.getcwd()[:-6] +'analysis/by_year/census_data_2011.csv', low_memory=False, encoding='utf-8')
-census_2014 = pd.read_csv(os.getcwd()[:-6] +'analysis/by_year/census_data_2011.csv', low_memory=False, encoding='utf-8')
-census_2015 = pd.read_csv(os.getcwd()[:-6] +'analysis/by_year/census_data_2011.csv', low_memory=False, encoding='utf-8')
-census_2016 = pd.read_csv(os.getcwd()[:-6] +'analysis/by_year/census_data_2011.csv', low_memory=False, encoding='utf-8')
-census_2017 = pd.read_csv(os.getcwd()[:-6] +'analysis/by_year/census_data_2011.csv', low_memory=False, encoding='utf-8')
-census_2018 = pd.read_csv(os.getcwd()[:-6] +'analysis/by_year/census_data_2011.csv', low_memory=False, encoding='utf-8')
-census_2019 = pd.read_csv(os.getcwd()[:-6] +'analysis/by_year/census_data_2011.csv', low_memory=False, encoding='utf-8')
+census_2011 = pd.read_csv(os.getcwd() +'/analysis/by_year/census_2011.csv', low_memory=False, encoding='utf-8')
+census_2012 = pd.read_csv(os.getcwd() +'/analysis/by_year/census_2011.csv', low_memory=False, encoding='utf-8')
+census_2013 = pd.read_csv(os.getcwd() +'/analysis/by_year/census_2011.csv', low_memory=False, encoding='utf-8')
+census_2014 = pd.read_csv(os.getcwd() +'/analysis/by_year/census_2011.csv', low_memory=False, encoding='utf-8')
+census_2015 = pd.read_csv(os.getcwd() +'/analysis/by_year/census_2011.csv', low_memory=False, encoding='utf-8')
+census_2016 = pd.read_csv(os.getcwd() +'/analysis/by_year/census_2011.csv', low_memory=False, encoding='utf-8')
+census_2017 = pd.read_csv(os.getcwd() +'/analysis/by_year/census_2011.csv', low_memory=False, encoding='utf-8')
+census_2018 = pd.read_csv(os.getcwd() +'/analysis/by_year/census_2011.csv', low_memory=False, encoding='utf-8')
+census_2019 = pd.read_csv(os.getcwd() +'/analysis/by_year/census_2011.csv', low_memory=False, encoding='utf-8')
 
 # Find and rename median age columns
 for df in [census_2011, census_2012, census_2013, census_2014, census_2015, census_2016]:
@@ -96,14 +96,33 @@ census_2017 = func_make_float(census_2017)
 census_2018 = func_make_float(census_2018)
 census_2019 = func_make_float(census_2019)
 
+
+# strip 'ZCTA5 ' from Name columns
+def func_strip_ZCTA5(df):
+    df['NAME'] = df['NAME'].str.lstrip('ZCTA5 ')
+    return df
+
+census_2011 = func_strip_ZCTA5(census_2011)
+census_2012 = func_strip_ZCTA5(census_2012)
+census_2013 = func_strip_ZCTA5(census_2013)
+census_2014 = func_strip_ZCTA5(census_2014)
+census_2015 = func_strip_ZCTA5(census_2015)
+census_2016 = func_strip_ZCTA5(census_2016)
+census_2017 = func_strip_ZCTA5(census_2017)
+census_2018 = func_strip_ZCTA5(census_2018)
+census_2019 = func_strip_ZCTA5(census_2019)
+
+
 # Write census data to csv
-census_2011 = census_2011.to_csv(os.getcwd()[:-6] +'analysis/cleaned_features/census_2011.csv', index = False)
-census_2012 = census_2012.to_csv(os.getcwd()[:-6] +'analysis/cleaned_features/census_2012.csv', index = False)
-census_2013 = census_2013.to_csv(os.getcwd()[:-6] +'analysis/cleaned_features/census_2013.csv', index = False)
-census_2014 = census_2014.to_csv(os.getcwd()[:-6] +'analysis/cleaned_features/census_2014.csv', index = False)
-census_2015 = census_2015.to_csv(os.getcwd()[:-6] +'analysis/cleaned_features/census_2015.csv', index = False)
-census_2016 = census_2016.to_csv(os.getcwd()[:-6] +'analysis/cleaned_features/census_2016.csv', index = False)
-census_2017 = census_2017.to_csv(os.getcwd()[:-6] +'analysis/cleaned_features/census_2017.csv', index = False)
-census_2018 = census_2018.to_csv(os.getcwd()[:-6] +'analysis/cleaned_features/census_2018.csv', index = False)
-census_2019 = census_2019.to_csv(os.getcwd()[:-6] +'analysis/cleaned_features/census_2019.csv', index = False)
+census_2011 = census_2011.to_csv(os.getcwd() +'/analysis/cleaned_features/census_2011.csv', index = False)
+census_2012 = census_2012.to_csv(os.getcwd() +'/analysis/cleaned_features/census_2012.csv', index = False)
+census_2013 = census_2013.to_csv(os.getcwd() +'/analysis/cleaned_features/census_2013.csv', index = False)
+census_2014 = census_2014.to_csv(os.getcwd() +'/analysis/cleaned_features/census_2014.csv', index = False)
+census_2015 = census_2015.to_csv(os.getcwd() +'/analysis/cleaned_features/census_2015.csv', index = False)
+census_2016 = census_2016.to_csv(os.getcwd() +'/analysis/cleaned_features/census_2016.csv', index = False)
+census_2017 = census_2017.to_csv(os.getcwd() +'/analysis/cleaned_features/census_2017.csv', index = False)
+census_2018 = census_2018.to_csv(os.getcwd() +'/analysis/cleaned_features/census_2018.csv', index = False)
+census_2019 = census_2019.to_csv(os.getcwd() +'/analysis/cleaned_features/census_2019.csv', index = False)
+
+
 

@@ -3,17 +3,16 @@ from tabulate import tabulate
 import os
 
 
-
 # Read cleaned dataframes
-census_2011 = pd.read_csv(os.getcwd()[:-6] + 'analysis/cleaned_features/census_2011.csv', encoding='utf-8')
-census_2012 = pd.read_csv(os.getcwd()[:-6] + 'analysis/cleaned_features/census_2012.csv', encoding='utf-8')
-census_2013 = pd.read_csv(os.getcwd()[:-6] + 'analysis/cleaned_features/census_2013.csv', encoding='utf-8')
-census_2014 = pd.read_csv(os.getcwd()[:-6] + 'analysis/cleaned_features/census_2014.csv', encoding='utf-8')
-census_2015 = pd.read_csv(os.getcwd()[:-6] + 'analysis/cleaned_features/census_2015.csv', encoding='utf-8')
-census_2016 = pd.read_csv(os.getcwd()[:-6] + 'analysis/cleaned_features/census_2016.csv', encoding='utf-8')
-census_2017 = pd.read_csv(os.getcwd()[:-6] + 'analysis/cleaned_features/census_2017.csv', encoding='utf-8')
-census_2018 = pd.read_csv(os.getcwd()[:-6] + 'analysis/cleaned_features/census_2018.csv', encoding='utf-8')
-census_2019 = pd.read_csv(os.getcwd()[:-6] + 'analysis/cleaned_features/census_2019.csv', encoding='utf-8')
+census_2011 = pd.read_csv(os.getcwd() + '/analysis/cleaned_features/census_2011.csv', encoding='utf-8')
+census_2012 = pd.read_csv(os.getcwd() + '/analysis/cleaned_features/census_2012.csv', encoding='utf-8')
+census_2013 = pd.read_csv(os.getcwd() + '/analysis/cleaned_features/census_2013.csv', encoding='utf-8')
+census_2014 = pd.read_csv(os.getcwd() + '/analysis/cleaned_features/census_2014.csv', encoding='utf-8')
+census_2015 = pd.read_csv(os.getcwd() + '/analysis/cleaned_features/census_2015.csv', encoding='utf-8')
+census_2016 = pd.read_csv(os.getcwd() + '/analysis/cleaned_features/census_2016.csv', encoding='utf-8')
+census_2017 = pd.read_csv(os.getcwd() + '/analysis/cleaned_features/census_2017.csv', encoding='utf-8')
+census_2018 = pd.read_csv(os.getcwd() + '/analysis/cleaned_features/census_2018.csv', encoding='utf-8')
+census_2019 = pd.read_csv(os.getcwd() + '/analysis/cleaned_features/census_2019.csv', encoding='utf-8')
 
 
 # Group data based on zipcode
