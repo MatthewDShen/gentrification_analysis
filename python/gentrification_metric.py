@@ -27,6 +27,8 @@ census_2017 = census_2017.groupby(['NAME'], as_index=False).mean()
 census_2018 = census_2018.groupby(['NAME'], as_index=False).mean()
 census_2019 = census_2019.groupby(['NAME'], as_index=False).mean()
 
+
+# make certain features per capita
 def func_to_make_per_capita(df):
     result = df.copy()
     for feature_name in ['white_non-hispanic','foreign_born_not_a_us_citizen','bachelors']:
