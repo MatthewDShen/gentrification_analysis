@@ -1,27 +1,19 @@
 import pandas as pd
 from tabulate import tabulate
+import os
+
+
 
 # Read cleaned dataframes
-#census_2011 = pd.read_csv('analysis/cleaned_features/census_2011.csv')
-#census_2012 = pd.read_csv('analysis/cleaned_features/census_2012.csv')
-#census_2013 = pd.read_csv('analysis/cleaned_features/census_2013.csv')
-#census_2014 = pd.read_csv('analysis/cleaned_features/census_2014.csv')
-#census_2015 = pd.read_csv('analysis/cleaned_features/census_2015.csv')
-#census_2016 = pd.read_csv('analysis/cleaned_features/census_2016.csv')
-#census_2017 = pd.read_csv('analysis/cleaned_features/census_2017.csv')
-#census_2018 = pd.read_csv('analysis/cleaned_features/census_2018.csv')
-#census_2019 = pd.read_csv('analysis/cleaned_features/census_2019.csv')
-
-#read cleaned dataframes_thomas
-census_2011 = pd.read_csv('/Users/twallacech/Cornell Tech/Urban Data/Semester_Project/urban_data_project/analysis/cleaned_features/census_2011.csv')
-census_2012 = pd.read_csv('/Users/twallacech/Cornell Tech/Urban Data/Semester_Project/urban_data_project/analysis/cleaned_features/census_2012.csv')
-census_2013 = pd.read_csv('/Users/twallacech/Cornell Tech/Urban Data/Semester_Project/urban_data_project/analysis/cleaned_features/census_2013.csv')
-census_2014 = pd.read_csv('/Users/twallacech/Cornell Tech/Urban Data/Semester_Project/urban_data_project/analysis/cleaned_features/census_2014.csv')
-census_2015 = pd.read_csv('/Users/twallacech/Cornell Tech/Urban Data/Semester_Project/urban_data_project/analysis/cleaned_features/census_2015.csv')
-census_2016 = pd.read_csv('/Users/twallacech/Cornell Tech/Urban Data/Semester_Project/urban_data_project/analysis/cleaned_features/census_2016.csv')
-census_2017 = pd.read_csv('/Users/twallacech/Cornell Tech/Urban Data/Semester_Project/urban_data_project/analysis/cleaned_features/census_2017.csv')
-census_2018 = pd.read_csv('/Users/twallacech/Cornell Tech/Urban Data/Semester_Project/urban_data_project/analysis/cleaned_features/census_2018.csv')
-census_2019 = pd.read_csv('/Users/twallacech/Cornell Tech/Urban Data/Semester_Project/urban_data_project/analysis/cleaned_features/census_2019.csv')
+census_2011 = pd.read_csv(os.getcwd()[:-6] + 'analysis/cleaned_features/census_2011.csv', encoding='utf-8')
+census_2012 = pd.read_csv(os.getcwd()[:-6] + 'analysis/cleaned_features/census_2012.csv', encoding='utf-8')
+census_2013 = pd.read_csv(os.getcwd()[:-6] + 'analysis/cleaned_features/census_2013.csv', encoding='utf-8')
+census_2014 = pd.read_csv(os.getcwd()[:-6] + 'analysis/cleaned_features/census_2014.csv', encoding='utf-8')
+census_2015 = pd.read_csv(os.getcwd()[:-6] + 'analysis/cleaned_features/census_2015.csv', encoding='utf-8')
+census_2016 = pd.read_csv(os.getcwd()[:-6] + 'analysis/cleaned_features/census_2016.csv', encoding='utf-8')
+census_2017 = pd.read_csv(os.getcwd()[:-6] + 'analysis/cleaned_features/census_2017.csv', encoding='utf-8')
+census_2018 = pd.read_csv(os.getcwd()[:-6] + 'analysis/cleaned_features/census_2018.csv', encoding='utf-8')
+census_2019 = pd.read_csv(os.getcwd()[:-6] + 'analysis/cleaned_features/census_2019.csv', encoding='utf-8')
 
 
 # Group data based on zipcode
@@ -34,6 +26,26 @@ census_2016 = census_2016.groupby(['NAME'], as_index=False).mean()
 census_2017 = census_2017.groupby(['NAME'], as_index=False).mean()
 census_2018 = census_2018.groupby(['NAME'], as_index=False).mean()
 census_2019 = census_2019.groupby(['NAME'], as_index=False).mean()
+
+
+# make certain features per capita
+def func_to_make_per_capita(df):
+    result = df.copy()
+    for feature_name in ['white_non-hispanic','foreign_born_not_a_us_citizen','bachelors']:
+        result[feature_name] = df[feature_name].apply(df[feature_name]/df['total_population'])
+    return result
+
+
+# apply the func to make per capita to some columns in the dataframes
+census_2011 = func_to_make_per_capita(census_2011)
+census_2012 = func_to_make_per_capita(census_2012)
+census_2013 = func_to_make_per_capita(census_2013)
+census_2014 = func_to_make_per_capita(census_2014)
+census_2015 = func_to_make_per_capita(census_2015)
+census_2016 = func_to_make_per_capita(census_2016)
+census_2017 = func_to_make_per_capita(census_2017)
+census_2018 = func_to_make_per_capita(census_2018)
+census_2019 = func_to_make_per_capita(census_2019)
 
 
 # Interpolate data to fill in missing values
@@ -106,4 +118,4 @@ print('unique values',len(df_delta_norm['NAME'].unique()))
 
 print('total values', len(df_delta_norm['NAME']))
 
-#print(df_delta_norm[df_delta_norm['NAME'] == 'ZCTA5 11249'])
+print(tabulate(df_delta_norm.head(), headers='keys', tablefmt='psql'))

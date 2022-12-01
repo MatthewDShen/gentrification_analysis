@@ -1,15 +1,16 @@
 import pandas as pd
+import os
 
 # Read in CSVs
-census_2011 = pd.read_csv('analysis/by_year/census_data_2011.csv', low_memory=False)
-census_2012 = pd.read_csv('analysis/by_year/census_data_2011.csv', low_memory=False)
-census_2013 = pd.read_csv('analysis/by_year/census_data_2011.csv', low_memory=False)
-census_2014 = pd.read_csv('analysis/by_year/census_data_2011.csv', low_memory=False)
-census_2015 = pd.read_csv('analysis/by_year/census_data_2011.csv', low_memory=False)
-census_2016 = pd.read_csv('analysis/by_year/census_data_2011.csv', low_memory=False)
-census_2017 = pd.read_csv('analysis/by_year/census_data_2011.csv', low_memory=False)
-census_2018 = pd.read_csv('analysis/by_year/census_data_2011.csv', low_memory=False)
-census_2019 = pd.read_csv('analysis/by_year/census_data_2011.csv', low_memory=False)
+census_2011 = pd.read_csv(os.getcwd()[:-6] +'analysis/by_year/census_data_2011.csv', low_memory=False, encoding='utf-8')
+census_2012 = pd.read_csv(os.getcwd()[:-6] +'analysis/by_year/census_data_2011.csv', low_memory=False, encoding='utf-8')
+census_2013 = pd.read_csv(os.getcwd()[:-6] +'analysis/by_year/census_data_2011.csv', low_memory=False, encoding='utf-8')
+census_2014 = pd.read_csv(os.getcwd()[:-6] +'analysis/by_year/census_data_2011.csv', low_memory=False, encoding='utf-8')
+census_2015 = pd.read_csv(os.getcwd()[:-6] +'analysis/by_year/census_data_2011.csv', low_memory=False, encoding='utf-8')
+census_2016 = pd.read_csv(os.getcwd()[:-6] +'analysis/by_year/census_data_2011.csv', low_memory=False, encoding='utf-8')
+census_2017 = pd.read_csv(os.getcwd()[:-6] +'analysis/by_year/census_data_2011.csv', low_memory=False, encoding='utf-8')
+census_2018 = pd.read_csv(os.getcwd()[:-6] +'analysis/by_year/census_data_2011.csv', low_memory=False, encoding='utf-8')
+census_2019 = pd.read_csv(os.getcwd()[:-6] +'analysis/by_year/census_data_2011.csv', low_memory=False, encoding='utf-8')
 
 # Find and rename median age columns
 for df in [census_2011, census_2012, census_2013, census_2014, census_2015, census_2016]:
@@ -20,7 +21,7 @@ for df in [census_2011, census_2012, census_2013, census_2014, census_2015, cens
 for df in [census_2017, census_2018, census_2019]:
     df.rename(columns = {
         'DP05_0018E' : 'median_age'
-    }, inplace = True)   
+    }, inplace = True)
 
 # Find and rename white non-hispanic
 for df in [census_2011, census_2012, census_2013, census_2014, census_2015, census_2016]:
@@ -37,10 +38,9 @@ for df in [census_2017, census_2018, census_2019]:
 for df in [census_2011, census_2012, census_2013, census_2014, census_2015, census_2016, census_2017, census_2018, census_2019]:
     df.rename(columns = {
         'S1901_C01_012E': 'household_income',
-        'DP05_0001E': 'total_population'
     }, inplace = True)
 
-# Find and rename number of immigrants
+# Find and rename number of immigrints
 for df in [census_2011, census_2012, census_2013, census_2014, census_2015, census_2016, census_2017, census_2018]:
     df.rename(columns = {
         'DP02_0095E': 'foreign_born_not_a_us_citizen'
@@ -52,14 +52,9 @@ for df in [census_2019]:
     }, inplace = True)
 
 # Find and rename education information
-for df in [census_2011, census_2012, census_2013, census_2014, census_2015, census_2016, census_2017, census_2018]:
+for df in [census_2011, census_2012, census_2013, census_2014, census_2015, census_2016, census_2017, census_2018, census_2019]:
     df.rename(columns = {
-        'DP02_0064E': 'bachelors'
-    }, inplace = True)
-
-for df in [census_2019]:
-    df.rename(columns = {
-        'DP02_0065E':'bachelors'
+        'DP02_0064E': 'bachelors',
     }, inplace = True)
 
 # Find and rename rental cost
@@ -74,15 +69,15 @@ for df in [census_2015, census_2016, census_2017, census_2018, census_2019]:
     }, inplace = True)
 
 # Remove columns not needed
-census_2011 = census_2011[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price', 'total_population']]
-census_2012 = census_2012[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price', 'total_population']]
-census_2013 = census_2013[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price', 'total_population']]
-census_2014 = census_2014[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price', 'total_population']]
-census_2015 = census_2015[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price', 'total_population']]
-census_2016 = census_2016[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price', 'total_population']]
-census_2017 = census_2017[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price', 'total_population']]
-census_2018 = census_2018[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price', 'total_population']]
-census_2019 = census_2019[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price', 'total_population']]
+census_2011 = census_2011[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
+census_2012 = census_2012[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
+census_2013 = census_2013[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
+census_2014 = census_2014[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
+census_2015 = census_2015[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
+census_2016 = census_2016[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
+census_2017 = census_2017[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
+census_2018 = census_2018[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
+census_2019 = census_2019[['NAME','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_media_price']]
 
 # Function to make all string into floats or remove the value
 def func_make_float(df):
@@ -101,34 +96,14 @@ census_2017 = func_make_float(census_2017)
 census_2018 = func_make_float(census_2018)
 census_2019 = func_make_float(census_2019)
 
-def func_to_make_per_capita(df):
-    result = df.copy()
-    for feature_name in ['white_non-hispanic','foreign_born_not_a_us_citizen','bachelors']:
-        result[feature_name] = df[feature_name].apply(df[feature_name]/df['total_population'])
-    return result
-
-
-# apply the func to make per capita to some columns in the dataframes
-census_2011 = func_to_make_per_capita(census_2011)
-census_2012 = func_to_make_per_capita(census_2012)
-census_2013 = func_to_make_per_capita(census_2013)
-census_2014 = func_to_make_per_capita(census_2014)
-census_2015 = func_to_make_per_capita(census_2015)
-census_2016 = func_to_make_per_capita(census_2016)
-census_2017 = func_to_make_per_capita(census_2017)
-census_2018 = func_to_make_per_capita(census_2018)
-census_2019 = func_to_make_per_capita(census_2019)
-
-
-
 # Write census data to csv
-census_2011 = census_2011.to_csv('analysis/cleaned_features/census_2011.csv', index = False)
-census_2012 = census_2012.to_csv('analysis/cleaned_features/census_2012.csv', index = False)
-census_2013 = census_2013.to_csv('analysis/cleaned_features/census_2013.csv', index = False)
-census_2014 = census_2014.to_csv('analysis/cleaned_features/census_2014.csv', index = False)
-census_2015 = census_2015.to_csv('analysis/cleaned_features/census_2015.csv', index = False)
-census_2016 = census_2016.to_csv('analysis/cleaned_features/census_2016.csv', index = False)
-census_2017 = census_2017.to_csv('analysis/cleaned_features/census_2017.csv', index = False)
-census_2018 = census_2018.to_csv('analysis/cleaned_features/census_2018.csv', index = False)
-census_2019 = census_2019.to_csv('analysis/cleaned_features/census_2019.csv', index = False)
+census_2011 = census_2011.to_csv(os.getcwd()[:-6] +'analysis/cleaned_features/census_2011.csv', index = False)
+census_2012 = census_2012.to_csv(os.getcwd()[:-6] +'analysis/cleaned_features/census_2012.csv', index = False)
+census_2013 = census_2013.to_csv(os.getcwd()[:-6] +'analysis/cleaned_features/census_2013.csv', index = False)
+census_2014 = census_2014.to_csv(os.getcwd()[:-6] +'analysis/cleaned_features/census_2014.csv', index = False)
+census_2015 = census_2015.to_csv(os.getcwd()[:-6] +'analysis/cleaned_features/census_2015.csv', index = False)
+census_2016 = census_2016.to_csv(os.getcwd()[:-6] +'analysis/cleaned_features/census_2016.csv', index = False)
+census_2017 = census_2017.to_csv(os.getcwd()[:-6] +'analysis/cleaned_features/census_2017.csv', index = False)
+census_2018 = census_2018.to_csv(os.getcwd()[:-6] +'analysis/cleaned_features/census_2018.csv', index = False)
+census_2019 = census_2019.to_csv(os.getcwd()[:-6] +'analysis/cleaned_features/census_2019.csv', index = False)
 
