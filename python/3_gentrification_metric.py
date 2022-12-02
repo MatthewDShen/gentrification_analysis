@@ -93,25 +93,11 @@ df_delta['foreign_born_not_a_us_citizen_percent_delta'] = df_delta['foreign_born
 df_delta_norm = (df_delta-df_delta.mean())/df_delta.std()
 
 # Create census metric
-df_census_metric = pd.DataFrame(df_delta['NAME'])
+df_census_metric = pd.DataFrame(df_delta['NAME'].astype(str))
 df_census_metric['gentrification_metric'] = df_delta_norm.sum(axis = 'columns')# Get getrification metric for each ZCTA5
 
 # Write csv of census metric values
 df_census_metric.to_csv(os.getcwd() + '/analysis/removena/remove_na_vals.csv', index = False)
-
-
-# Get the mean of the normalized data
-# df_mean = df_delta_norm.mean()
-
-# print(df_mean)
-
-# # Get sum of mean values
-# int_gentrification_metric_mean = sum(df_mean)
-
-
-
-# # Get difference between city wide gentrification metric and individual zipcode
-# df_delta_norm['gentrification_metric_delta'] = df_delta_norm['gentrification_metric'] - int_gentrification_metric_mean
 
 # df_delta_norm[df_delta_norm['NAME'] == 'ZCTA5 11249']
 
