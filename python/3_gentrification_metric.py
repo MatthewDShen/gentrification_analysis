@@ -14,7 +14,17 @@ census_2017 = pd.read_csv(os.getcwd() + '/analysis/cleaned_features/census_2017.
 census_2018 = pd.read_csv(os.getcwd() + '/analysis/cleaned_features/census_2018.csv', encoding='utf-8')
 census_2019 = pd.read_csv(os.getcwd() + '/analysis/cleaned_features/census_2019.csv', encoding='utf-8')
 
-
+# Get only nyc zipcodes
+lst_nyc_zips = list(range(10001,10282)) + list(range(10301,10314)) + list(range(10451,10475)) + list(range(11004,11109)) + list(range(11351,11697)) + list(range(11201,11256)) # create list of zipcodes
+census_2011 = census_2011[census_2011['NAME'].isin(lst_nyc_zips)]
+census_2012 = census_2012[census_2012['NAME'].isin(lst_nyc_zips)]
+census_2013 = census_2013[census_2013['NAME'].isin(lst_nyc_zips)]
+census_2014 = census_2014[census_2014['NAME'].isin(lst_nyc_zips)]
+census_2015 = census_2015[census_2015['NAME'].isin(lst_nyc_zips)]
+census_2016 = census_2016[census_2016['NAME'].isin(lst_nyc_zips)]
+census_2017 = census_2017[census_2017['NAME'].isin(lst_nyc_zips)]
+census_2018 = census_2018[census_2018['NAME'].isin(lst_nyc_zips)]
+census_2019 = census_2019[census_2019['NAME'].isin(lst_nyc_zips)]
 
 # Group data based on zipcode
 # census_2011 = census_2011.groupby(['NAME'], as_index=False).mean()
@@ -71,18 +81,6 @@ census_2019 = func_to_make_per_capita(census_2019)
 
 
 
-# print(census_2011.isna().sum())
-# print(census_2012.isna().sum())
-# print(census_2013.isna().sum())
-# print(census_2014.isna().sum())
-# print(census_2015.isna().sum())
-# print(census_2016.isna().sum())
-# print(census_2017.isna().sum())
-# print(census_2018.isna().sum())
-# print(census_2019.isna().sum())
-
-
-
 # Get difference in values from 2011 and 2019
 df_2011_2019 = pd.merge(census_2011,census_2019,how = 'inner', on = 'NAME', suffixes=['_2011','_2019'])
 
@@ -103,21 +101,15 @@ for feature in lst_values[1:]:
 df_delta['median_age_delta'] = df_delta['median_age_delta'] * -1
 df_delta['foreign_born_not_a_us_citizen_percent_delta'] = df_delta['foreign_born_not_a_us_citizen_percent_delta'] * -1
 
-
-
 # Normalize the data
-# def normalize(df):
-#     '''The following normalizes the data'''
-#     result = df.copy()
-#     for feature_name in df.columns[1:]:
-#         max_value = df[feature_name].max()
-#         min_value = df[feature_name].min()
-#         result[feature_name] = (df[feature_name] - min_value) / (max_value - min_value)
-#     return result
-# df_delta_norm = normalize(df_delta)
+df_delta_norm = (df_delta-df_delta.mean())/df_delta.std()
 
-# Write csv of delta values
-df_delta.to_csv(os.getcwd() + '/analysis/normalized/clean_normalized.csv', index = False)
+# Create census metric
+df_census_metric = pd.DataFrame(df_delta['NAME'])
+df_census_metric['gentrification_metric'] = df_delta_norm.sum(axis = 'columns')# Get getrification metric for each ZCTA5
+
+# Write csv of census metric values
+df_delta.to_csv(os.getcwd() + '/analysis/removena/remove_na_vals.csv', index = False)
 
 
 # Get the mean of the normalized data
@@ -128,8 +120,7 @@ df_delta.to_csv(os.getcwd() + '/analysis/normalized/clean_normalized.csv', index
 # # Get sum of mean values
 # int_gentrification_metric_mean = sum(df_mean)
 
-# # Get getrification metric for each ZCTA5
-# df_delta_norm['gentrification_metric'] = df_delta_norm.sum(axis = 'columns')
+
 
 # # Get difference between city wide gentrification metric and individual zipcode
 # df_delta_norm['gentrification_metric_delta'] = df_delta_norm['gentrification_metric'] - int_gentrification_metric_mean
