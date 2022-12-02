@@ -15,7 +15,7 @@ census_2018 = pd.read_csv(os.getcwd() + '/analysis/cleaned_features/census_2018.
 census_2019 = pd.read_csv(os.getcwd() + '/analysis/cleaned_features/census_2019.csv', encoding='utf-8')
 
 # Get only nyc zipcodes
-lst_nyc_zips = list(range(10001,10282)) + list(range(10301,10314)) + list(range(10451,10475)) + list(range(11004,11109)) + list(range(11351,11697)) + list(range(11201,11256)) # create list of zipcodes
+lst_nyc_zips = list(range(10001-1,10282+1)) + list(range(10301-1,10314+1)) + list(range(10451-1,10475+1)) + list(range(11004-1,11109+1)) + list(range(11351-1,11697+1)) + list(range(11201-1,11256+1)) # create list of zipcodes
 census_2011 = census_2011[census_2011['NAME'].isin(lst_nyc_zips)]
 census_2012 = census_2012[census_2012['NAME'].isin(lst_nyc_zips)]
 census_2013 = census_2013[census_2013['NAME'].isin(lst_nyc_zips)]
