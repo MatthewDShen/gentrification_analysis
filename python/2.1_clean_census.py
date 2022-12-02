@@ -12,12 +12,19 @@ for year in lst_years: # go through each year we are observing
 for i in range(0,len(lst_years)): # go through each year we are observing
     lst_dfs[i]['NAME'] = lst_dfs[i]['NAME'].str.lstrip('ZCTA5 ')
 
+print(lst_dfs[0])
+
 # Subset ZCTA5s in NYC
 lst_nyc_zips = list(range(10001,10282)) + list(range(10301,10314)) + list(range(10451,10475)) + list(range(11004,11109)) + list(range(11351,11697)) + list(range(11201,11256)) # create list of zipcodes
 for i in range(0,len(lst_years)): # go through range of years
-    df_temp = lst_dfs[i] # set up temp dataframe
-    lst_dfs[i] = df_temp[df_temp['NAME'].isin(lst_nyc_zips)] # remove values that are not in nyc zipcode list
+    lst_dfs[i]['NAME'] = lst_dfs[i][lst_dfs[i]['NAME'].isin(lst_nyc_zips)]
+
+
 print(lst_dfs[0])
+
+sys.exit(0)
+
+
 # Rename variables we want to look at
 for i in range(0,len(lst_dfs)): # loop through all years
     lst_dfs[i] = lst_dfs[i].rename(columns = {
@@ -51,7 +58,7 @@ for i in range(6,len(lst_dfs)): # loop through dataframes for 2017 to 2019
 
 # print(lst_dfs[0]['Zipcode'])
 
-sys.exit(0)
+
 
 for i in range(0,7): # loop through dataframes for 2011 to 2018
         lst_dfs[i] = lst_dfs[i].rename(columns = { 
