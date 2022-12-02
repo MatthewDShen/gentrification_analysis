@@ -26,18 +26,6 @@ census_2017 = census_2017[census_2017['NAME'].isin(lst_nyc_zips)]
 census_2018 = census_2018[census_2018['NAME'].isin(lst_nyc_zips)]
 census_2019 = census_2019[census_2019['NAME'].isin(lst_nyc_zips)]
 
-# Group data based on zipcode
-# census_2011 = census_2011.groupby(['NAME'], as_index=False).mean()
-# census_2012 = census_2012.groupby(['NAME'], as_index=False).mean()
-# census_2013 = census_2013.groupby(['NAME'], as_index=False).mean()
-# census_2014 = census_2014.groupby(['NAME'], as_index=False).mean()
-# census_2015 = census_2015.groupby(['NAME'], as_index=False).mean()
-# census_2016 = census_2016.groupby(['NAME'], as_index=False).mean()
-# census_2017 = census_2017.groupby(['NAME'], as_index=False).mean()
-# census_2018 = census_2018.groupby(['NAME'], as_index=False).mean()
-# census_2019 = census_2019.groupby(['NAME'], as_index=False).mean()
-
-
 # Interpolate data to fill in missing values
 census_2011.interpolate(inplace = True)
 census_2012.interpolate(inplace = True)
@@ -109,7 +97,7 @@ df_census_metric = pd.DataFrame(df_delta['NAME'])
 df_census_metric['gentrification_metric'] = df_delta_norm.sum(axis = 'columns')# Get getrification metric for each ZCTA5
 
 # Write csv of census metric values
-df_delta.to_csv(os.getcwd() + '/analysis/removena/remove_na_vals.csv', index = False)
+df_census_metric.to_csv(os.getcwd() + '/analysis/removena/remove_na_vals.csv', index = False)
 
 
 # Get the mean of the normalized data
