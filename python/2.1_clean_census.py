@@ -19,12 +19,6 @@ lst_nyc_zips = list(range(10001,10282)) + list(range(10301,10314)) + list(range(
 for i in range(0,len(lst_years)): # go through range of years
     lst_dfs[i]['NAME'] = lst_dfs[i][lst_dfs[i]['NAME'].isin(lst_nyc_zips)]
 
-
-print(lst_dfs[0])
-
-sys.exit(0)
-
-
 # Rename variables we want to look at
 for i in range(0,len(lst_dfs)): # loop through all years
     lst_dfs[i] = lst_dfs[i].rename(columns = {
