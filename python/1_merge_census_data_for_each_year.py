@@ -71,7 +71,4 @@ lst_years = ['2011','2012','2013','2014','2015','2016','2017','2018','2019']
 lst_census_types = ['DP02','DP04','DP05','S1901']
 path = os.getcwd() + '/inbound/census_data/'
 
-
-
-
 func_write_csv_single_year(lst_years,lst_census_types,path)

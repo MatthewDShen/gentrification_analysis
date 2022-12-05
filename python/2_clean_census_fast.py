@@ -10,23 +10,23 @@ for df in [census_2011,census_2019]:
         'S1901_C01_012E': 'household_income'# Find and rename household income
     }, inplace = True)
 
-census_2011 = census_2011.rename(columns = {
+
+
+census_2011.rename(columns = {
         'DP05_0017E' : 'median_age',# Find and rename median age columns
         'DP05_0072E' : 'white_non-hispanic',# Find and rename percent white non-hispanic
         'DP02_0095E': 'foreign_born_not_a_us_citizen',# Find and rename immigrants
         'DP02_0064E': 'bachelors',# Find and rename number of bachelors degrees
-        'DP04_0132E': 'gross_rent_median_price',# Find and rename median rent
-    }, inplace = True)
+        'DP04_0132E': 'gross_rent_median_price'# Find and rename median rent
+        }, inplace = True)
 
-census_2019 = census_2019.rename(columns = {
+census_2019.rename(columns = {
         'DP05_0018E' : 'median_age',# Find and rename median age columns
         'DP05_0077E' : 'white_non-hispanic',# Find and rename white non-hispanic
-        'DP02_0097E': 'foreign_born_not_a_us_citizen'# Find and rename white
+        'DP02_0097E': 'foreign_born_not_a_us_citizen',# Find and rename white
         'DP02_0065E': 'bachelors',# Find and rename number of bachelors degrees
-        'DP04_0134E': 'gross_rent_median_price'#
+        'DP04_0134E': 'gross_rent_median_price'# Find and rename median rent
     }, inplace = True)
-
-
 
 # Remove columns not needed
 census_2011 = census_2011[['NAME','total_population','median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_median_price']]
@@ -38,7 +38,6 @@ def func_make_float(df):
     for feature_name in ['median_age','white_non-hispanic','household_income','foreign_born_not_a_us_citizen','bachelors','gross_rent_median_price']:
         result[feature_name] = df[feature_name].apply(pd.to_numeric, errors='coerce')
     return result
-
 census_2011 = func_make_float(census_2011)
 census_2019 = func_make_float(census_2019)
 
@@ -56,7 +55,6 @@ def func_remove_pop_0(df):
     return df
 census_2011 = func_remove_pop_0(census_2011)
 census_2019 = func_remove_pop_0(census_2019)
-
 
 # Write census data to csv
 census_2011 = census_2011.to_csv(os.getcwd() +'/analysis/cleaned_features/census_2011.csv', index = False)

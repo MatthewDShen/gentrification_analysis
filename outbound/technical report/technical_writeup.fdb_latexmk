@@ -1,6 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1670256902 "technical_writeup.tex" "technical_writeup.pdf" "technical_writeup" 1670256903
+["pdflatex"] 1670274840 "/home/matthewdshen/GitHub/urban_data_project/outbound/technical report/technical_writeup.tex" "/home/matthewdshen/GitHub/urban_data_project/outbound/technical report/technical_writeup.pdf" "technical_writeup" 1670274854
   "/etc/texmf/web2c/texmf.cnf" 1670215012 475 c0e671620eb5563b2130f56340a5fde8 ""
+  "/home/matthewdshen/GitHub/urban_data_project/outbound/technical report/technical_writeup.aux" 1670274841 3008 6a02ccbce7d652a0fc065c3a46661d28 ""
+  "/home/matthewdshen/GitHub/urban_data_project/outbound/technical report/technical_writeup.tex" 1670274853 9391 20dbb5088372fa0f93e9f8e0eb34da96 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -69,9 +71,11 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1670256161 1313680 944b2df2e136a07b58492d406042c370 ""
   "IEEEtran.cls" 1670213792 281957 5b2e4fa15b0f7eabb840ebf67df4c0f7 ""
   "images/gen_map.png" 1670213792 109383 0fe355bfc6d6fe0acf850895712e76d4 ""
-  "technical_writeup.aux" 1670256902 3250 dbb642d0af6407fcfa4656a1b7941722 "pdflatex"
-  "technical_writeup.tex" 1670256902 11303 a19c479ed402c7925b70f620a0e3f8bf ""
+  "technical_writeup.aux" 1670274841 3008 6a02ccbce7d652a0fc065c3a46661d28 "pdflatex"
+  "technical_writeup.tex" 1670274853 9391 20dbb5088372fa0f93e9f8e0eb34da96 ""
   (generated)
-  "technical_writeup.pdf"
   "technical_writeup.log"
+  "/home/matthewdshen/GitHub/urban_data_project/outbound/technical report/technical_writeup.log"
+  "/home/matthewdshen/GitHub/urban_data_project/outbound/technical report/technical_writeup.pdf"
   "technical_writeup.aux"
+  "technical_writeup.pdf"

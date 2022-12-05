@@ -33,21 +33,15 @@ tw526@cornell.edu}
 
 \maketitle
 
-\begin{abstract}
-The following document is a technical write-up on how our team decided to quantify gentrification in New York City. This project was done as part of INFO 5430: Urban Data at Cornell Tech. 
-\end{abstract}
-
 \begin{IEEEkeywords}
 Urban Technology, Urban Data, Data Science, Information Systems
 \end{IEEEkeywords}
 
-\section{Introduction}
-The project was conducted in two phases. In the first phase, we developed a methodology to quantify gentrification. In the second phase, we applied this methodology to zip codes in New York City between 2011 and 2019.
 
 \section{Analysis}
 
 \subsection{How we defined gentrification}
-In order to define gentrification, we looked at six different metrics and observed how they changed over time. A change in any of these metrics would mean an increase or decrease in gentrification. A summary of these metrics and our hypothesis of how their change corresponds to gentrification can be seen in Table~\ref{gen_metrics}.
+In order to define gentrification, we looked at six different metrics. A change in any of these metrics would mean an increase or decrease in gentrification. A summary of these metrics and how their change corresponds to gentrification can be seen in Table~\ref{gen_metrics}.
 
 \begin{table}[htbp]
 \caption{Gentrification Metrics}
@@ -71,11 +65,9 @@ Median Income        & \% Foreign Born(Non-US Citizen)*              \\
 These metrics were selected based on \cite{b1}, \cite{b2}, \cite{b3}, and \cite{b4}
 
 \subsection{Project Scope}
-Data was collected on the different metrics found in Table~\ref{gen_metrics} through the US Census Bureau. We looked at information between 2011 and 2019. 2011 was selected as the start point because it was the first year with available data that we needed. We used 2019 as the end point to avoid any atypical demographic changes due to the 2020 COVID-19 pandemic.
+We looked at information between 2011 and 2019 from the US Census Bureau. 2011 was the starting point because it was the first year with available data. 2019 was the end point to avoid any atypical demographic changes due to the 2020 COVID-19.
 
-ZCTA5 values were used as the baseline geo-location. A more granular baseline geo-location would have been census tracts; however, our project looks at long-term changes in areas, and census tracts can change from year to year. ZCTA5 values remain relatively constant, which meant that we knew that our geo-location baseline would remain the same.
-
-New York City was selected as the test bed for our analysis.
+ZCTA5 values were used as the baseline, because they remain relatively constant over time, which meant that our baseline would be consistent.
 
 \subsection{Methodology}
 
@@ -97,29 +89,24 @@ DP04 & Selected Housing Characteristics\\
 \label{surveys}
 \end{center}
 \end{table}
-Each survey data came in separate files for each year. As a result, we had four surveys for each of the nine years. These data sets were merged into one file for each individual year. This meant that we had a consolidated data set with all the survey data each year.
-
-During our analysis of the data, it was later determined that only the 2011 and 2019 data was required.
+Each survey came in separate files for each year. These data sets were merged into one file for each individual year. 
 
 \subsubsection{Column Metadata}
-Unfortunately, the column metadata from the US Census Bureau changed for some of our gentrification variables over the years. As a result, we went through each data set and determined how the column names changed with each year to ensure we grabbed the correct data set for each year. The relevant columns used can be found in Appendix~\ref{app_A}.
+Column metadata changed for some of our variables over the years. We determined how the column names changed with each year to ensure we grabbed the correct data set for each year. The relevant columns used can be found in Appendix~\ref{app_A}.
 
 Once all the columns were renamed we subset the data to only include the ZCTA5s, the data in Table~\ref{gen_metrics}, and the total population.
 
 \subsubsection{Cleaning Data Types}
-We also found that some of the census data was presented as strings. In order to process the data, we either converted the data to a float/integer or removed the data (if it was not needed).
+Some of the census data was presented as strings. In order to process the data, we either converted the data to a float/integer or removed the data (if it was not needed).
 
 We also found that the ZCTA5 data was in the format of "ZCTA5 00000". To allow for easier querying we striped the "ZCTA5 ".
 
-We also found that some ZCTA5 values did not have an associated population. This was likely due to new office buildings that have independent ZCTA5 values and no residents. As a result, we removed these rows from our data set.
+We also found that some ZCTA5 values did not have an associated population. This was likely due to new office buildings that have independent ZCTA5 values and no residents. We removed these rows that did not have a population.
 
 The final data cleaning measure was to subset the ZCTA5s to only include ones in NYC.
 
 \subsubsection{Interpolating Missing Data}
-Once the data for each year was cleaned and subset, we reviewed for any missing data in the gentrification factors. We filled any missing data by interpolating with the nearby ZCTA5 values. We used interpoliation rather than the mean of all data because we can make the assumption that ZCTA5 values near each other would have similar values.
-
-\subsubsection{Per Captia Calculations}
-The white population, bachelor's degrees, and foreign-born (non-US citizen) data was given to us as raw numbers. To ensure that an increase in these values over time could not be attributed to general trends in the city or changes in population numbers, we divided them by the total population to get per capita values at each ZCTA5s.
+Once the data for each year was cleaned and subset, we reviewed for any missing data in the gentrification factors. We filled any missing data by interpolating with the nearby ZCTA5 values. We used interpolation rather than filling missing data with the city-wide mean because we can make the assumption that ZCTA5 values near each other would have similar values.
 
 \subsubsection{Calculate change over time}
 The next step was the look at how our different metrics changed over time. To do this, we merged the cleaned data sets from 2011 and 2019 on the ZCTA5s and then found the difference between 2011 and 2019. Next, we transformed the metrics in Table~\ref{gen_metrics} that decrease gentrification into negative numbers. This ensures that an increase in any of our gentrification factors results in a lower gentrification score.
@@ -135,7 +122,7 @@ In Equation~\ref{norm} $x$ is the value we are changing, $\mu$ is the mean of th
 Now that our data is normalized, we created our gentrification metric by adding all the values in Table~\ref{gen_metrics} for each ZCTA5.
 
 \section{Results}
-The gentrification metric was plotted with respect to each zip code. This visualization can be seen in Appendix~\ref{app_b}. From our results, we can see that the ZCTA5's that gentrified the most were: 11216, 10005, 10007, 11221, 11237, 11217, 11238, 11222, 11101, 11225. In contrast the ZCTA5's that gentrified the least were: 10002, 11364, 10469, 10075, 11358, 11356, 11355, 11354, 11239, 10069.
+The gentrification metric was plotted with respect to each zip code. This visualization can be seen in Appendix~\ref{app_b}.
 
 \begin{thebibliography}{00}
 \bibitem{b1} A. Owens and J. Candipan, ``Racial/Ethnic Transition and Hierarchy Among Ascending Neighborhoods'' \textit{Urban Affairs Review}, vol. 55, no. 6, Apr. 2018. Accessed: Dec. 4, 2022. doi: https://doi.org/ 10.1177/107808741877081. [Online]. Available: https://journals.sagepub.com/doi/10.1177/1078087418770810

@@ -67,12 +67,8 @@ census_2017 = func_to_make_per_capita(census_2017)
 census_2018 = func_to_make_per_capita(census_2018)
 census_2019 = func_to_make_per_capita(census_2019)
 
-
-
 # Get difference in values from 2011 and 2019
 df_2011_2019 = pd.merge(census_2011,census_2019,how = 'inner', on = 'NAME', suffixes=['_2011','_2019'])
-
-
 
 # Get list of values
 lst_values = ['NAME','median_age','white_non-hispanic_percent','household_income','foreign_born_not_a_us_citizen_percent','bachelors_percent','gross_rent_median_price']
@@ -83,7 +79,6 @@ df_delta = pd.DataFrame(df_2011_2019['NAME'])
 # Go through each element of the list values
 for feature in lst_values[1:]:
     df_delta[feature + '_delta'] = df_2011_2019[feature + '_2019'] - df_2011_2019[feature + '_2011'] # get the change in census tracts
-
 
 # Switch signs so that gentrification can be seen as positive
 df_delta['median_age_delta'] = df_delta['median_age_delta'] * -1
@@ -99,8 +94,9 @@ for feature in lst_values[1:]:
     df_census_metric[feature] = df_delta_norm[feature+'_delta']
 
 # Write csv of census metric values
-df_census_metric.to_csv(os.getcwd() + '/analysis/removena/remove_na_vals.csv', index = False)
+df_census_metric.to_csv(os.getcwd() + '/analysis/gentrification_metric/2019_2011_gentrification_metrics.csv', index = False)
 
+# Write csvs for each year with the cleaned census data without out NAs
 census_2011.to_csv(os.getcwd() + '/analysis/query/census_2011.csv', index = False)
 census_2012.to_csv(os.getcwd() + '/analysis/query/census_2012.csv', index = False)
 census_2013.to_csv(os.getcwd() + '/analysis/query/census_2013.csv', index = False)
