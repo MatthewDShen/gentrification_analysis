@@ -95,6 +95,11 @@ df_delta_norm = (df_delta-df_delta.mean())/df_delta.std()
 # Create census metric
 df_census_metric = pd.DataFrame(df_delta['NAME'].astype(str))
 df_census_metric['gentrification_metric'] = df_delta_norm.sum(axis = 'columns')# Get getrification metric for each ZCTA5
+for feature in lst_values[1:]:
+    df_census_metric[feature] = df_delta_norm[feature+'_delta']
+
+print(df_census_metric['bachelors_percent_2019']-df_census_metric['bachelors_percent_2019'])
+
 
 # Write csv of census metric values
 df_census_metric.to_csv(os.getcwd() + '/analysis/removena/remove_na_vals.csv', index = False)

@@ -2,8 +2,6 @@ import pandas as pd
 import os
 
 # Read in CSVs
-
-
 census_2011 = pd.read_csv(os.getcwd() +'/analysis/by_year/census_2011.csv', low_memory=False, encoding='utf-8')
 census_2012 = pd.read_csv(os.getcwd() +'/analysis/by_year/census_2012.csv', low_memory=False, encoding='utf-8')
 census_2013 = pd.read_csv(os.getcwd() +'/analysis/by_year/census_2013.csv', low_memory=False, encoding='utf-8')
