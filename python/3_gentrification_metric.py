@@ -98,16 +98,15 @@ df_census_metric['gentrification_metric'] = df_delta_norm.sum(axis = 'columns')#
 for feature in lst_values[1:]:
     df_census_metric[feature] = df_delta_norm[feature+'_delta']
 
-print(df_census_metric['bachelors_percent_2019']-df_census_metric['bachelors_percent_2019'])
-
-
 # Write csv of census metric values
 df_census_metric.to_csv(os.getcwd() + '/analysis/removena/remove_na_vals.csv', index = False)
 
-# df_delta_norm[df_delta_norm['NAME'] == 'ZCTA5 11249']
-
-# print('unique values',len(df_delta_norm['NAME'].unique()))
-
-# print('total values', len(df_delta_norm['NAME']))
-
-# print(tabulate(df_delta_norm.head(), headers='keys', tablefmt='psql'))
+census_2011.to_csv(os.getcwd() + '/analysis/query/census_2011.csv', index = False)
+census_2012.to_csv(os.getcwd() + '/analysis/query/census_2012.csv', index = False)
+census_2013.to_csv(os.getcwd() + '/analysis/query/census_2013.csv', index = False)
+census_2014.to_csv(os.getcwd() + '/analysis/query/census_2014.csv', index = False)
+census_2015.to_csv(os.getcwd() + '/analysis/query/census_2015.csv', index = False)
+census_2016.to_csv(os.getcwd() + '/analysis/query/census_2016.csv', index = False)
+census_2017.to_csv(os.getcwd() + '/analysis/query/census_2017.csv', index = False)
+census_2018.to_csv(os.getcwd() + '/analysis/query/census_2018.csv', index = False)
+census_2019.to_csv(os.getcwd() + '/analysis/query/census_2019.csv', index = False)
